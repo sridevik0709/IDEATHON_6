@@ -1,16 +1,16 @@
 """
-Architectural boundary guard for Energy Accounting module.
-Level 1 explicitly reserves accounting logic for subsequent milestones.
+Energy Accounting module status.
+Level 3: Core Electricity Intelligence.
 """
 
 from typing import Dict
 
 
 class AccountingModuleStatus:
-    NAME: str = "Energy Accounting Service"
-    LEVEL_TARGET: str = "Level 2"
-    STATUS: str = "standby"
-    DESCRIPTION: str = "Feeder balancing, transmission loss reconciliation, and billing discrepancies"
+    NAME: str = "Energy Accounting & Discrepancy Engine"
+    LEVEL_TARGET: str = "Level 3"
+    STATUS: str = "operational"
+    DESCRIPTION: str = "Deterministic boundary reconciliation, 10-point data quality audits, and meter intelligence active"
 
     @classmethod
     def get_status(cls) -> Dict[str, str]:

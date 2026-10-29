@@ -150,3 +150,124 @@ export interface InvestigationCaseItem {
   is_simulated: boolean;
   created_at: string;
 }
+
+// ============================================================================
+// LEVEL 3: CORE ELECTRICITY INTELLIGENCE TYPES
+// ============================================================================
+
+export interface QualityFindingData {
+  rule_code: string;
+  dimension: string;
+  severity: string;
+  passed: boolean;
+  diagnostic_message: string;
+  target_entity: string;
+  details?: Record<string, unknown> | null;
+  recommended_action?: string | null;
+}
+
+export interface MeterLookupData {
+  meter_id: string;
+  meter_code: string;
+  household_count: number;
+  associated_asset_id?: string | null;
+  associated_asset_code?: string | null;
+  associated_asset_name?: string | null;
+  associated_asset_type?: string | null;
+  installation_type: string;
+  phase_configuration: string;
+  multiplier: number;
+  data_source_code: string;
+  data_source_type: string;
+  data_source_authorized: boolean;
+  is_simulated: boolean;
+  disclaimer: string;
+}
+
+export interface ConsumptionTrendPoint {
+  timestamp: string;
+  energy_kwh: number;
+  peak_power_kw?: number | null;
+  is_unusual: boolean;
+  unusual_reason?: string | null;
+}
+
+export interface MeterConsumptionData {
+  meter_code: string;
+  household_count: number;
+  analysis_period_start: string;
+  analysis_period_end: string;
+  total_consumption_kwh: number;
+  average_hourly_kwh: number;
+  peak_power_kw: number;
+  minimum_interval_kwh: number;
+  maximum_interval_kwh: number;
+  readings_count: number;
+  expected_readings_count: number;
+  missing_intervals_count: number;
+  missing_timestamps: string[];
+  unusual_changes_count: number;
+  data_quality_warnings: QualityFindingData[];
+  trend_series: ConsumptionTrendPoint[];
+  compliance_notice: string;
+}
+
+export interface CalculationStepData {
+  step_number: number;
+  title: string;
+  formula: string;
+  inputs: Record<string, unknown>;
+  output_name: string;
+  output_value: number;
+  unit: string;
+  explanation: string;
+}
+
+export interface SourceMeasurementTraceData {
+  entity_code: string;
+  entity_type: string;
+  readings_count: number;
+  total_energy_kwh: number;
+  unit: string;
+  interval_minutes: number;
+  validation_status: string;
+  data_source: string;
+  is_simulated: boolean;
+}
+
+export interface AccountingBoundaryData {
+  asset_code: string;
+  name: string;
+  asset_type: string;
+  voltage_class: string;
+  rated_capacity_kva: number;
+  child_entities_count: number;
+  child_type: string;
+  status: string;
+}
+
+export interface AccountingDossierData {
+  boundary_asset_code: string;
+  boundary_asset_name: string;
+  boundary_asset_type: string;
+  voltage_class: string;
+  time_window_start: string;
+  time_window_end: string;
+  total_expected_intervals: number;
+  total_actual_intervals: number;
+  missing_intervals_count: number;
+  energy_entering_boundary_kwh: number;
+  recorded_downstream_energy_kwh: number;
+  other_accounted_flows_kwh: number;
+  gross_discrepancy_kwh: number;
+  unaccounted_energy_kwh: number;
+  discrepancy_percentage: number;
+  sensor_uncertainty_kwh: number;
+  remaining_uncertainty_percent: number;
+  neutral_classification: string;
+  classification_reason: string;
+  calculation_steps: CalculationStepData[];
+  source_measurements: SourceMeasurementTraceData[];
+  data_quality_findings: QualityFindingData[];
+  reproducibility_hash: string;
+}

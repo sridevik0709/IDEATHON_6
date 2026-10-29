@@ -23,6 +23,8 @@ import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { ReadinessGrid } from '@/components/dashboard/ReadinessGrid';
 import { ScenariosExplorer } from '@/components/dashboard/ScenariosExplorer';
+import { MeterLookupView } from '@/components/dashboard/MeterLookupView';
+import { DiscrepancyExplorer } from '@/components/dashboard/DiscrepancyExplorer';
 import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
 import { ValidationConsole } from '@/components/dashboard/ValidationConsole';
 import { envConfig } from '@/lib/config';
@@ -117,26 +119,30 @@ export function OverviewDashboard() {
                     National Ideathon Milestone:
                   </span>
                   <Badge variant="emerald" className="text-[10px]">
-                    LEVEL 2: DATA FOUNDATION
+                    LEVEL 3: CORE ELECTRICITY INTELLIGENCE
                   </Badge>
                 </div>
                 <p className="text-xs text-slate-300 font-sans mt-0.5">
-                  PostgreSQL persistent storage, 15 relational entities, deterministic synthetic generator, and 5 repeatable demonstration scenarios.
+                  Deterministic boundary energy accounting (Unaccounted = Entering − Downstream − Other Flows), 10-point data quality audits, and cluster meter intelligence.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2 self-start sm:self-auto font-mono text-xs">
+            <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto font-mono text-xs">
               <button
                 type="button"
-                onClick={() => setActiveTab('scenarios')}
-                className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold transition-all"
+                onClick={() => setActiveTab('meter-lookup')}
+                className="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold transition-all cursor-pointer"
               >
-                Launch Scenarios →
+                Meter Lookup →
               </button>
-              <code className="px-2 py-1 rounded bg-black/40 text-cyan-300 border border-cyan-900/40">
-                {envConfig.apiBaseUrl}
-              </code>
+              <button
+                type="button"
+                onClick={() => setActiveTab('accounting-explorer')}
+                className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold transition-all cursor-pointer"
+              >
+                Discrepancy Explorer →
+              </button>
             </div>
           </div>
 
@@ -209,20 +215,28 @@ export function OverviewDashboard() {
                         },
                         {
                           name: 'Energy Accounting & Feeder Balancing',
-                          status: 'standby',
-                          details: 'Reserved for Level 3',
-                          ready: false,
+                          status: isConnected ? 'operational' : 'standby',
+                          details: 'Active (Level 3) - Deterministic boundary reconciliation & 10-point audit engine',
+                          ready: isConnected,
                         },
                         {
                           name: 'AI Grid Intelligence & Forensic Auditor',
                           status: 'standby',
-                          details: 'Reserved for Level 3',
+                          details: 'Reserved for Level 4',
                           ready: false,
                         },
                       ]
                     }
                   />
                 </div>
+              )}
+
+              {activeTab === 'meter-lookup' && (
+                <MeterLookupView />
+              )}
+
+              {activeTab === 'accounting-explorer' && (
+                <DiscrepancyExplorer />
               )}
 
               {activeTab === 'scenarios' && (

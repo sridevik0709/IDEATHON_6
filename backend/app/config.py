@@ -11,8 +11,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     # Application Metadata
     PROJECT_NAME: str = Field(default="GRIDGUARD NEXUS X", description="Platform name")
-    PROJECT_VERSION: str = Field(default="2.0.0-level2", description="Current release version")
-    STAGE: str = Field(default="LEVEL 2: DATA FOUNDATION", description="Platform development phase")
+    PROJECT_VERSION: str = Field(default="3.0.0-level3", description="Current release version")
+    STAGE: str = Field(default="LEVEL 3: CORE ELECTRICITY INTELLIGENCE", description="Platform development phase")
     ENVIRONMENT: str = Field(default="development", description="Runtime environment: development/testing/production")
     DEBUG: bool = Field(default=True, description="Debug mode flag")
 

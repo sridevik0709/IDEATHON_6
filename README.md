@@ -1,12 +1,12 @@
 # GRIDGUARD NEXUS X
 ### Software-Only Electricity Intelligence and Investigation Platform
 
-[![Milestone](https://img.shields.io/badge/Milestone-Level%202%3A%20Data%20Foundation-cyan)](#)
+[![Milestone](https://img.shields.io/badge/Milestone-Level%203%3A%20Core%20Electricity%20Intelligence-cyan)](#)
 [![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.14-009688)](#)
 [![Validation](https://img.shields.io/badge/Validation-Pydantic%20v2-e91e63)](#)
 [![Frontend](https://img.shields.io/badge/Frontend-Next.js%2016%20%7C%20React%2019-black)](#)
 [![Database](https://img.shields.io/badge/Storage-PostgreSQL%20%7C%20SQLAlchemy%202.0-336791)](#)
-[![Tests](https://img.shields.io/badge/Tests-Pytest%20(26)%20%2B%20Vitest%20(6)%20Passing-brightgreen)](#)
+[![Tests](https://img.shields.io/badge/Tests-Pytest%20(38)%20%2B%20Vitest%20(8)%20Passing-brightgreen)](#)
 
 ---
 
@@ -14,8 +14,8 @@
 
 **GridGuard Nexus X** is an enterprise-grade software intelligence platform developed for national-level electrical distribution networks. The platform identifies non-technical losses (electricity theft, meter tampering, and unmetered loads), reconciles substation energy balances, and produces evidence-backed audit trails for utility investigators.
 
-> **Active Milestone**: **LEVEL 2: DATA FOUNDATION & REPEATABLE DEMONSTRATION SCENARIOS**  
-> Features 15 PostgreSQL relational entities, deterministic synthetic data generation for substations, feeders, distribution transformers, and household aggregate meters, a multi-source data adapter architecture, data quality audit rules, and 5 repeatable demonstration scenarios with interactive UI execution.
+> **Active Milestone**: **LEVEL 3: CORE ELECTRICITY INTELLIGENCE**  
+> Features deterministic boundary energy accounting ($E_{\text{unaccounted}} = E_{\text{in}} - E_{\text{downstream}} - E_{\text{technical}}$), a 10-point data-quality audit engine with clear diagnostic reasoning, aggregate cluster meter inspection, an interactive Discrepancy Explorer with inspectable mathematical steps, and a strict non-prejudgment forensic classification architecture.
 
 ---
 

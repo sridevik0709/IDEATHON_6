@@ -71,6 +71,14 @@ def get_engine() -> Engine:
     return _engine  # type: ignore
 
 
+def SessionLocal() -> Session:
+    """Convenience factory for obtaining an active session."""
+    global _SessionFactory
+    if _SessionFactory is None:
+        init_database()
+    return _SessionFactory()  # type: ignore
+
+
 def get_db() -> Generator[Session, None, None]:
     """Dependency for obtaining a scoped SQLAlchemy session."""
     global _SessionFactory

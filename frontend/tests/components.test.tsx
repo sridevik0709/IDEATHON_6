@@ -5,6 +5,8 @@ import { Badge } from '@/components/ui/Badge';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
 import { ReadinessGrid } from '@/components/dashboard/ReadinessGrid';
 import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
+import { MeterLookupView } from '@/components/dashboard/MeterLookupView';
+import { DiscrepancyExplorer } from '@/components/dashboard/DiscrepancyExplorer';
 import type { HealthStatusData, SubsystemHealth } from '@/types/api';
 
 describe('Frontend UI Components', () => {
@@ -30,8 +32,8 @@ describe('Frontend UI Components', () => {
     const mockHealth: HealthStatusData = {
       status: 'healthy',
       project: 'GRIDGUARD NEXUS X',
-      version: '1.0.0-level1',
-      stage: 'LEVEL 1: PROJECT FOUNDATION',
+      version: '3.0.0-level3',
+      stage: 'LEVEL 3: CORE ELECTRICITY INTELLIGENCE',
       environment: 'development',
       uptime_seconds: 120.4,
       database: {
@@ -70,5 +72,17 @@ describe('Frontend UI Components', () => {
     expect(screen.getByText('API Gateway')).toBeDefined();
     expect(screen.getByText('Energy Accounting')).toBeDefined();
     expect(screen.getByText('1 of 2 Ready')).toBeDefined();
+  });
+
+  it('renders MeterLookupView with privacy compliance banner', () => {
+    render(<MeterLookupView />);
+    expect(screen.getByText(/National Ideathon Privacy Safeguard/i)).toBeDefined();
+    expect(screen.getByPlaceholderText(/Enter meter identifier/i)).toBeDefined();
+  });
+
+  it('renders DiscrepancyExplorer with non-prejudgment mandate', () => {
+    render(<DiscrepancyExplorer />);
+    expect(screen.getByText(/Forensic Non-Prejudgment Mandate/i)).toBeDefined();
+    expect(screen.getByText(/Select Physical Distribution Boundary/i)).toBeDefined();
   });
 });

@@ -51,7 +51,7 @@ async def get_health(request: Request) -> StandardSuccessResponse[HealthStatusDa
             name=AccountingModuleStatus.NAME,
             status=AccountingModuleStatus.STATUS,
             details=f"Phase: {AccountingModuleStatus.LEVEL_TARGET} - {AccountingModuleStatus.DESCRIPTION}",
-            ready=False
+            ready=True
         ),
         SubsystemHealth(
             name=AIServicesModuleStatus.NAME,
