@@ -247,37 +247,53 @@
 {
   "status": "success",
   "data": {
-    "simulation_id": "WHAT_IF_a89bc21e",
-    "boundary_asset_code": "TX-NORTH-01",
+    "boundary_asset_code": "DT-11KV-415V-101",
+    "boundary_asset_name": "Distribution Transformer 101",
     "scenario_type": "DELAYED_READINGS_ARRIVED",
-    "data_provenance": "HYPOTHETICAL_SIMULATION",
-    "before": {
-      "input_energy_kwh": 127.6,
-      "downstream_energy_kwh": 101.4,
-      "technical_losses_kwh": 0.0,
-      "unaccounted_energy_kwh": 26.2,
-      "discrepancy_percentage": 20.53,
-      "warning_count": 2,
-      "top_hypothesis": "Delayed Downstream Readings"
+    "scenario_title": "A delayed reading becomes available",
+    "assumption_description": "Hypothetical addition of 25.00 kWh delayed downstream consumption reading for meter AGG-MTR-DT101-C.",
+    "original_accounting": {
+      "input_energy_kwh": 97.8,
+      "downstream_energy_kwh": 95.18,
+      "technical_loss_kwh": 0.0,
+      "unaccounted_energy_kwh": 2.62,
+      "discrepancy_percentage": 2.68,
+      "neutral_classification": "NORMAL_TECHNICAL_LOSS",
+      "classification_reason": "Discrepancy within expected Class 0.5 sensor error margins."
     },
-    "after": {
-      "input_energy_kwh": 127.6,
-      "downstream_energy_kwh": 127.6,
-      "technical_losses_kwh": 0.0,
+    "revised_accounting": {
+      "input_energy_kwh": 97.8,
+      "downstream_energy_kwh": 111.68,
+      "technical_loss_kwh": 0.0,
       "unaccounted_energy_kwh": 0.0,
       "discrepancy_percentage": 0.0,
-      "warning_count": 1,
-      "top_hypothesis": "Normal Operation"
+      "neutral_classification": "NORMAL_TECHNICAL_LOSS",
+      "classification_reason": "Hypothetical readings fully accounted for discrepancy."
     },
-    "delta": {
-      "delta_downstream_kwh": 26.2,
-      "delta_unaccounted_kwh": -26.2,
-      "delta_discrepancy_percentage": -20.53,
-      "warnings_resolved": 1
+    "differences": {
+      "delta_unaccounted_kwh": -2.62,
+      "delta_discrepancy_pct": -2.68,
+      "delta_downstream_kwh": 16.5,
+      "delta_technical_loss_kwh": 0.0,
+      "classification_changed": false,
+      "original_classification": "NORMAL_TECHNICAL_LOSS",
+      "revised_classification": "NORMAL_TECHNICAL_LOSS",
+      "discrepancy_resolved": true
     },
-    "data_protection_certified": true,
-    "case_non_auto_resolved": true,
-    "remaining_uncertainty": "Simulation verified mathematically in sandbox. Physical field audit required to certify operational meter."
+    "original_quality_warnings_count": 0,
+    "revised_quality_warnings_count": 0,
+    "resolved_warnings": [],
+    "hypotheses_shift": {},
+    "remaining_uncertainty_kwh": 0.0,
+    "remaining_uncertainty_pct": 0.0,
+    "data_protection": {
+      "original_records_unmodified": true,
+      "scenario_run_id": "ce8fad60-6885-4922-b0cd-459366eea263",
+      "correction_provenance": "HYPOTHETICAL_SIMULATION",
+      "real_case_auto_resolution_prevented": true,
+      "audit_notice": "Forensic Integrity Guarantee: Original telemetry readings in distribution_boundary_readings and consumption_readings remain strictly unmodified. This what-if analysis was evaluated in an isolated in-memory simulation sandbox. Real-world operational cases cannot be closed without physical field verification."
+    },
+    "executed_at": "2026-10-30T01:08:20.123456Z"
   }
 }
 ```
