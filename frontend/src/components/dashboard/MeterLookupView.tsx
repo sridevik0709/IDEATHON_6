@@ -1,21 +1,13 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Activity,
   AlertCircle,
-  AlertTriangle,
   ArrowRight,
   BarChart3,
   CheckCircle2,
-  Clock,
-  Database,
-  Flame,
-  Info,
-  Layers,
   Search,
   Shield,
-  Zap,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
@@ -24,7 +16,6 @@ import { gridGuardApi } from '@/lib/api';
 import type {
   MeterConsumptionData,
   MeterLookupData,
-  QualityFindingData,
 } from '@/types/api';
 
 const DEMO_METERS = [
@@ -43,7 +34,7 @@ export function MeterLookupView() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<{ code: string; message: string } | null>(null);
 
-  const fetchMeterData = async (code: string) => {
+  const fetchMeterData = useCallback(async (code: string) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -53,23 +44,24 @@ export function MeterLookupView() {
       ]);
       setMeterInfo(lookupRes.data);
       setConsumption(consumptionRes.data);
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const anyErr = err as { code?: string; message?: string };
       setError({
-        code: err.code || 'ERR_METER_LOOKUP_FAILED',
-        message: err.message || 'Unable to retrieve meter information.',
+        code: anyErr?.code || 'ERR_METER_LOOKUP_FAILED',
+        message: anyErr?.message || 'Unable to retrieve meter information.',
       });
       setMeterInfo(null);
       setConsumption(null);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (selectedMeterCode) {
       fetchMeterData(selectedMeterCode);
     }
-  }, [selectedMeterCode]);
+  }, [selectedMeterCode, fetchMeterData]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

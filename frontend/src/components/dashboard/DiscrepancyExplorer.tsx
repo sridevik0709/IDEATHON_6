@@ -1,23 +1,12 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
-  Activity,
-  AlertCircle,
-  AlertTriangle,
-  ArrowRight,
   Calculator,
-  CheckCircle2,
-  Cpu,
   Database,
-  FileText,
   Info,
-  Layers,
-  Percent,
   RefreshCw,
   Scale,
-  ShieldAlert,
-  Zap,
 } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import { ErrorAlert } from '@/components/ui/ErrorAlert';
@@ -36,43 +25,46 @@ export function DiscrepancyExplorer() {
   const [isReconciling, setIsReconciling] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function loadBoundaries() {
-      setIsLoading(true);
-      try {
-        const res = await gridGuardApi.getAccountingBoundaries();
-        setBoundaries(res.data);
-        if (res.data.length > 0 && !selectedBoundary) {
-          setSelectedBoundary(res.data[0].asset_code);
-        }
-      } catch (err: any) {
-        setError(err.message || 'Unable to load network accounting boundaries.');
-      } finally {
-        setIsLoading(false);
+  const loadBoundaries = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const res = await gridGuardApi.getAccountingBoundaries();
+      setBoundaries(res.data);
+      if (res.data.length > 0 && !selectedBoundary) {
+        setSelectedBoundary(res.data[0].asset_code);
       }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Unable to load network accounting boundaries.';
+      setError(msg);
+    } finally {
+      setIsLoading(false);
     }
-    loadBoundaries();
-  }, []);
+  }, [selectedBoundary]);
 
-  const runReconciliation = async (assetCode: string) => {
+  const runReconciliation = useCallback(async (assetCode: string) => {
     setIsReconciling(true);
     setError(null);
     try {
       const res = await gridGuardApi.reconcileBoundary(assetCode);
       setDossier(res.data);
-    } catch (err: any) {
-      setError(err.message || 'Energy accounting calculation failed.');
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Energy accounting calculation failed.';
+      setError(msg);
       setDossier(null);
     } finally {
       setIsReconciling(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    loadBoundaries();
+  }, [loadBoundaries]);
 
   useEffect(() => {
     if (selectedBoundary) {
       runReconciliation(selectedBoundary);
     }
-  }, [selectedBoundary]);
+  }, [selectedBoundary, runReconciliation]);
 
   const getClassificationBadge = (cls: string) => {
     switch (cls) {
