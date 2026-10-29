@@ -22,6 +22,7 @@ import { LoadingState } from '@/components/ui/LoadingSpinner';
 import { Header } from '@/components/layout/Header';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { ReadinessGrid } from '@/components/dashboard/ReadinessGrid';
+import { ScenariosExplorer } from '@/components/dashboard/ScenariosExplorer';
 import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
 import { ValidationConsole } from '@/components/dashboard/ValidationConsole';
 import { envConfig } from '@/lib/config';
@@ -115,19 +116,25 @@ export function OverviewDashboard() {
                   <span className="font-mono text-xs font-bold uppercase tracking-wider text-cyan-400">
                     National Ideathon Milestone:
                   </span>
-                  <Badge variant="cyan" className="text-[10px]">
-                    LEVEL 1 ONLY
+                  <Badge variant="emerald" className="text-[10px]">
+                    LEVEL 2: DATA FOUNDATION
                   </Badge>
                 </div>
                 <p className="text-xs text-slate-300 font-sans mt-0.5">
-                  Full-stack software foundation with decoupled domain boundaries, FastAPI ASGI gateway, and Pydantic validation.
+                  PostgreSQL persistent storage, 15 relational entities, deterministic synthetic generator, and 5 repeatable demonstration scenarios.
                 </p>
               </div>
             </div>
 
             <div className="flex items-center gap-2 self-start sm:self-auto font-mono text-xs">
-              <span className="text-slate-400">Gateway:</span>
-              <code className="px-2 py-0.5 rounded bg-black/40 text-cyan-300 border border-cyan-900/40">
+              <button
+                type="button"
+                onClick={() => setActiveTab('scenarios')}
+                className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold transition-all"
+              >
+                Launch Scenarios →
+              </button>
+              <code className="px-2 py-1 rounded bg-black/40 text-cyan-300 border border-cyan-900/40">
                 {envConfig.apiBaseUrl}
               </code>
             </div>
@@ -179,10 +186,47 @@ export function OverviewDashboard() {
                   </div>
 
                   {/* Readiness Subsystems Grid */}
-                  {health?.subsystems && (
-                    <ReadinessGrid subsystems={health.subsystems} />
-                  )}
+                  <ReadinessGrid
+                    subsystems={
+                      health?.subsystems || [
+                        {
+                          name: 'API & Routing Gateway',
+                          status: isConnected ? 'operational' : 'disconnected',
+                          details: 'FastAPI ASGI Gateway',
+                          ready: isConnected,
+                        },
+                        {
+                          name: 'Data Processing & Telemetry Engine',
+                          status: isConnected ? 'operational' : 'disconnected',
+                          details: 'Active (Level 2) - Synthetic scenario generator and data quality engine',
+                          ready: isConnected,
+                        },
+                        {
+                          name: 'PostgreSQL Persistent Storage',
+                          status: isConnected ? 'operational' : 'standby',
+                          details: 'Persistent storage engine',
+                          ready: isConnected,
+                        },
+                        {
+                          name: 'Energy Accounting & Feeder Balancing',
+                          status: 'standby',
+                          details: 'Reserved for Level 3',
+                          ready: false,
+                        },
+                        {
+                          name: 'AI Grid Intelligence & Forensic Auditor',
+                          status: 'standby',
+                          details: 'Reserved for Level 3',
+                          ready: false,
+                        },
+                      ]
+                    }
+                  />
                 </div>
+              )}
+
+              {activeTab === 'scenarios' && (
+                <ScenariosExplorer />
               )}
 
               {activeTab === 'diagnostics' && (

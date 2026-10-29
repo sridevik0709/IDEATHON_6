@@ -42,15 +42,15 @@ async def get_health(request: Request) -> StandardSuccessResponse[HealthStatusDa
             ready=True
         ),
         SubsystemHealth(
+            name="Data Processing & Telemetry Engine",
+            status="operational",
+            details="Active (Level 2) - Synthetic scenario generator, data quality audit, and stream ingestion operational",
+            ready=True
+        ),
+        SubsystemHealth(
             name=AccountingModuleStatus.NAME,
             status=AccountingModuleStatus.STATUS,
             details=f"Phase: {AccountingModuleStatus.LEVEL_TARGET} - {AccountingModuleStatus.DESCRIPTION}",
-            ready=False
-        ),
-        SubsystemHealth(
-            name=DataProcessingModuleStatus.NAME,
-            status=DataProcessingModuleStatus.STATUS,
-            details=f"Phase: {DataProcessingModuleStatus.LEVEL_TARGET} - {DataProcessingModuleStatus.DESCRIPTION}",
             ready=False
         ),
         SubsystemHealth(

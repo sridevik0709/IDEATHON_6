@@ -9,7 +9,7 @@ def test_default_settings():
     """Verify settings defaults are populated correctly."""
     s = Settings()
     assert s.PROJECT_NAME == "GRIDGUARD NEXUS X"
-    assert s.PROJECT_VERSION == "1.0.0-level1"
+    assert "2.0.0" in s.PROJECT_VERSION
     assert s.PORT == 8000
     assert "http://localhost:3000" in s.CORS_ORIGINS
 

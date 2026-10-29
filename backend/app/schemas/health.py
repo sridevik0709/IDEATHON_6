@@ -16,8 +16,8 @@ class SubsystemHealth(BaseModel):
 class HealthStatusData(BaseModel):
     status: str = Field(default="healthy", description="Overall platform status")
     project: str = Field(default="GRIDGUARD NEXUS X", description="Platform identifier")
-    version: str = Field(default="1.0.0-level1", description="Release version")
-    stage: str = Field(default="LEVEL 1: PROJECT FOUNDATION", description="Active project milestone")
+    version: str = Field(default="2.0.0-level2", description="Release version")
+    stage: str = Field(default="LEVEL 2: DATA FOUNDATION", description="Active project milestone")
     environment: str = Field(default="development", description="Runtime environment")
     uptime_seconds: float = Field(..., description="Seconds since process startup")
     database: SubsystemHealth = Field(..., description="Persistent storage status")

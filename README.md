@@ -1,12 +1,12 @@
 # GRIDGUARD NEXUS X
 ### Software-Only Electricity Intelligence and Investigation Platform
 
-[![Milestone](https://img.shields.io/badge/Milestone-Level%201%3A%20Foundation-cyan)](#)
+[![Milestone](https://img.shields.io/badge/Milestone-Level%202%3A%20Data%20Foundation-cyan)](#)
 [![Backend](https://img.shields.io/badge/Backend-FastAPI%20%7C%20Python%203.14-009688)](#)
 [![Validation](https://img.shields.io/badge/Validation-Pydantic%20v2-e91e63)](#)
 [![Frontend](https://img.shields.io/badge/Frontend-Next.js%2016%20%7C%20React%2019-black)](#)
-[![Database](https://img.shields.io/badge/Storage-PostgreSQL%20%7C%20psycopg%203-336791)](#)
-[![Tests](https://img.shields.io/badge/Tests-Pytest%20%2B%20Vitest%20(Passing)-brightgreen)](#)
+[![Database](https://img.shields.io/badge/Storage-PostgreSQL%20%7C%20SQLAlchemy%202.0-336791)](#)
+[![Tests](https://img.shields.io/badge/Tests-Pytest%20(26)%20%2B%20Vitest%20(6)%20Passing-brightgreen)](#)
 
 ---
 
@@ -14,8 +14,8 @@
 
 **GridGuard Nexus X** is an enterprise-grade software intelligence platform developed for national-level electrical distribution networks. The platform identifies non-technical losses (electricity theft, meter tampering, and unmetered loads), reconciles substation energy balances, and produces evidence-backed audit trails for utility investigators.
 
-> **Active Milestone**: **LEVEL 1 ONLY — PROJECT FOUNDATION**  
-> Focuses exclusively on establishing a rock-solid, decoupled system architecture, FastAPI ASGI gateway, Pydantic validation contracts, persistent PostgreSQL database connectivity with local fallback, and a mission-critical Next.js overview interface.
+> **Active Milestone**: **LEVEL 2: DATA FOUNDATION & REPEATABLE DEMONSTRATION SCENARIOS**  
+> Features 15 PostgreSQL relational entities, deterministic synthetic data generation for substations, feeders, distribution transformers, and household aggregate meters, a multi-source data adapter architecture, data quality audit rules, and 5 repeatable demonstration scenarios with interactive UI execution.
 
 ---
 

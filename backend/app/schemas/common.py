@@ -11,7 +11,7 @@ DataT = TypeVar("DataT")
 
 
 class ResponseMeta(BaseModel):
-    version: str = Field(default="1.0.0-level1", description="API Version")
+    version: str = Field(default="2.0.0-level2", description="API Version")
     timestamp: datetime = Field(
         default_factory=lambda: datetime.now(timezone.utc),
         description="ISO 8601 UTC timestamp of response generation"

@@ -10,6 +10,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import settings
+from app.database.base import Base
 
 logger = logging.getLogger("gridguard.database")
 
@@ -51,7 +52,12 @@ def init_database() -> Engine:
             connect_args=connect_args,
         )
         _SessionFactory = sessionmaker(autocommit=False, autoflush=False, bind=_engine)
-        logger.info(f"Database engine initialized with dialect: {_engine.dialect.name}")
+        
+        # Ensure all registered tables exist
+        import app.database.models  # noqa: F401 - ensure models are imported
+        Base.metadata.create_all(bind=_engine)
+        
+        logger.info(f"Database engine initialized and schema verified with dialect: {_engine.dialect.name}")
         return _engine
     except Exception as exc:
         logger.error(f"Failed to initialize database engine: {exc}")
