@@ -12,6 +12,7 @@ from app.api.v1.endpoints import (
     scenarios,
     validation,
     version,
+    what_if,
 )
 
 api_v1_router = APIRouter()
@@ -24,3 +25,4 @@ api_v1_router.include_router(data_foundation.router)
 api_v1_router.include_router(meters.router)
 api_v1_router.include_router(accounting.router)
 api_v1_router.include_router(investigation.router)
+api_v1_router.include_router(what_if.router)

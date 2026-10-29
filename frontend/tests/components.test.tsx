@@ -8,6 +8,8 @@ import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
 import { MeterLookupView } from '@/components/dashboard/MeterLookupView';
 import { DiscrepancyExplorer } from '@/components/dashboard/DiscrepancyExplorer';
 import { AiInvestigationView } from '@/components/dashboard/AiInvestigationView';
+import { EvidenceGraphView } from '@/components/dashboard/EvidenceGraphView';
+import { WhatIfSimulatorView } from '@/components/dashboard/WhatIfSimulatorView';
 import type { HealthStatusData, SubsystemHealth } from '@/types/api';
 
 describe('Frontend UI Components', () => {
@@ -92,5 +94,19 @@ describe('Frontend UI Components', () => {
     expect(screen.getByText(/Level 4: AI-Assisted Forensic Investigation/i)).toBeDefined();
     expect(screen.getByText(/Multi-hypothesis forensic matrix, 6-factor explainable prioritization/i)).toBeDefined();
     expect(screen.getByText(/Boundary:/i)).toBeDefined();
+  });
+
+  it('renders EvidenceGraphView with node lineage header and boundary select', () => {
+    render(<EvidenceGraphView />);
+    expect(screen.getByText(/Level 5: Interactive Evidence Investigation Graph/i)).toBeDefined();
+    expect(screen.getByText(/End-to-end evidence lineage connecting Detected Discrepancy/i)).toBeDefined();
+    expect(screen.getByText(/Boundary:/i)).toBeDefined();
+  });
+
+  it('renders WhatIfSimulatorView with scenario templates and simulation button', () => {
+    render(<WhatIfSimulatorView />);
+    expect(screen.getByText(/Level 5: What-If Simulation & Before-and-After Comparison/i)).toBeDefined();
+    expect(screen.getByText(/Select Repeatable What-If Assumption Scenario:/i)).toBeDefined();
+    expect(screen.getByText(/Run What-If Simulation/i)).toBeDefined();
   });
 });

@@ -358,3 +358,134 @@ export interface AssistantQueryResponseData {
   guardrail_validation: GuardrailValidationResultData;
   timestamp: string;
 }
+
+// -----------------------------------------------------------------------------
+// Level 5: Evidence Traceability and What-If Analysis
+// -----------------------------------------------------------------------------
+
+export type GraphVisualState =
+  | 'OBSERVED_EVIDENCE'
+  | 'CALCULATED_FINDING'
+  | 'HYPOTHESIS'
+  | 'RECOMMENDATION'
+  | 'CONFIRMED_OUTCOME';
+
+export interface GraphNodeData {
+  node_id: string;
+  node_type: string;
+  visual_state: GraphVisualState;
+  label: string;
+  subtitle?: string | null;
+  entity_code?: string | null;
+  timestamp_or_period?: string | null;
+  metric_value?: unknown;
+  unit?: string | null;
+  data_status: string;
+  calculation_formula?: string | null;
+  supporting_evidence_ids: string[];
+  missing_evidence_list: string[];
+  reasoning_rule?: string | null;
+  verification_status: string;
+  is_simulated: boolean;
+  metadata: Record<string, unknown>;
+}
+
+export interface GraphEdgeData {
+  edge_id: string;
+  source_node_id: string;
+  target_node_id: string;
+  relationship_type: string;
+  label: string;
+  is_dashed: boolean;
+}
+
+export interface InvestigationGraphData {
+  boundary_asset_code: string;
+  boundary_asset_name: string;
+  voltage_class: string;
+  analysis_period_start: string;
+  analysis_period_end: string;
+  nodes: GraphNodeData[];
+  edges: GraphEdgeData[];
+  summary: {
+    total_nodes: number;
+    total_edges: number;
+    nodes_by_visual_state: Record<string, number>;
+    top_recommended_hypothesis?: string;
+    priority_score?: number;
+    priority_level?: string;
+  };
+  generated_at: string;
+}
+
+export interface AccountingDeltaData {
+  energy_entering_kwh: number;
+  recorded_downstream_kwh: number;
+  other_accounted_flows_kwh: number;
+  gross_discrepancy_kwh: number;
+  unaccounted_energy_kwh: number;
+  discrepancy_percentage: number;
+  neutral_classification: string;
+  classification_reason: string;
+}
+
+export interface DifferenceSummaryData {
+  delta_unaccounted_kwh: number;
+  delta_discrepancy_pct: number;
+  delta_downstream_kwh: number;
+  delta_technical_loss_kwh: number;
+  classification_changed: boolean;
+  original_classification: string;
+  revised_classification: string;
+  discrepancy_resolved: boolean;
+}
+
+export interface DataProtectionGuaranteeData {
+  original_records_unmodified: boolean;
+  scenario_run_id: string;
+  correction_provenance: string;
+  real_case_auto_resolution_prevented: boolean;
+  audit_notice: string;
+}
+
+export interface BeforeAfterComparisonData {
+  boundary_asset_code: string;
+  boundary_asset_name: string;
+  scenario_type: string;
+  scenario_title: string;
+  assumption_description: string;
+  original_accounting: AccountingDeltaData;
+  revised_accounting: AccountingDeltaData;
+  differences: DifferenceSummaryData;
+  original_quality_warnings_count: number;
+  revised_quality_warnings_count: number;
+  resolved_warnings: string[];
+  hypotheses_shift: {
+    original_top_hypothesis: string;
+    revised_top_hypothesis: string;
+    top_hypothesis_changed: boolean;
+    original_priority_score: number;
+    revised_priority_score: number;
+    delta_priority_score: number;
+  };
+  remaining_uncertainty_kwh: number;
+  remaining_uncertainty_pct: number;
+  data_protection: DataProtectionGuaranteeData;
+  executed_at: string;
+}
+
+export interface WhatIfCatalogItemData {
+  scenario_type: string;
+  title: string;
+  category: string;
+  description: string;
+  typical_impact: string;
+  default_parameters: Record<string, unknown>;
+}
+
+export interface WhatIfCorrectionRequestData {
+  boundary_asset_code: string;
+  scenario_type: string;
+  parameters?: Record<string, unknown>;
+  simulated_provenance?: string;
+}

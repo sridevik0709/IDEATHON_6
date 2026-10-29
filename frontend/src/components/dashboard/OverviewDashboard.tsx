@@ -26,6 +26,8 @@ import { ScenariosExplorer } from '@/components/dashboard/ScenariosExplorer';
 import { MeterLookupView } from '@/components/dashboard/MeterLookupView';
 import { DiscrepancyExplorer } from '@/components/dashboard/DiscrepancyExplorer';
 import { AiInvestigationView } from '@/components/dashboard/AiInvestigationView';
+import { EvidenceGraphView } from '@/components/dashboard/EvidenceGraphView';
+import { WhatIfSimulatorView } from '@/components/dashboard/WhatIfSimulatorView';
 import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
 import { ValidationConsole } from '@/components/dashboard/ValidationConsole';
 import { envConfig } from '@/lib/config';
@@ -120,11 +122,11 @@ export function OverviewDashboard() {
                     National Ideathon Milestone:
                   </span>
                   <Badge variant="emerald" className="text-[10px]">
-                    LEVEL 4: AI-ASSISTED INVESTIGATION
+                    LEVEL 5: EVIDENCE TRACEABILITY AND WHAT-IF ANALYSIS
                   </Badge>
                 </div>
                 <p className="text-xs text-slate-300 font-sans mt-0.5">
-                  Multi-hypothesis forensic matrix, explainable 6-factor prioritization ranking, and evidence-grounded AI assistant with automated deterministic fallback.
+                  Interactive evidence lineage graph (Discrepancy → Sources → Findings → Hypotheses → Actions → Outcome) and What-If simulation sandbox with before-and-after comparison.
                 </p>
               </div>
             </div>
@@ -132,24 +134,24 @@ export function OverviewDashboard() {
             <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto font-mono text-xs">
               <button
                 type="button"
-                onClick={() => setActiveTab('ai-investigation')}
+                onClick={() => setActiveTab('evidence-graph')}
                 className="px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/40 font-bold transition-all cursor-pointer"
               >
-                AI Investigation →
+                Evidence Graph →
               </button>
               <button
                 type="button"
-                onClick={() => setActiveTab('accounting-explorer')}
+                onClick={() => setActiveTab('what-if')}
                 className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold transition-all cursor-pointer"
               >
-                Discrepancy Explorer →
+                What-If Simulator →
               </button>
               <button
                 type="button"
-                onClick={() => setActiveTab('meter-lookup')}
+                onClick={() => setActiveTab('ai-investigation')}
                 className="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold transition-all cursor-pointer"
               >
-                Meter Lookup →
+                AI Investigation →
               </button>
             </div>
           </div>
@@ -241,6 +243,14 @@ export function OverviewDashboard() {
 
               {(activeTab === 'ai-investigation' || activeTab === 'forensics') && (
                 <AiInvestigationView />
+              )}
+
+              {activeTab === 'evidence-graph' && (
+                <EvidenceGraphView />
+              )}
+
+              {activeTab === 'what-if' && (
+                <WhatIfSimulatorView />
               )}
 
               {activeTab === 'meter-lookup' && (
