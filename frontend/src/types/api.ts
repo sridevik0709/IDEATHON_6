@@ -271,3 +271,90 @@ export interface AccountingDossierData {
   data_quality_findings: QualityFindingData[];
   reproducibility_hash: string;
 }
+
+// -----------------------------------------------------------------------------
+// Level 4: AI-Assisted Investigation Types
+// -----------------------------------------------------------------------------
+
+export interface EvidenceItemData {
+  evidence_id: string;
+  source_type: string;
+  entity_code: string;
+  timestamp_or_period: string;
+  metric_name: string;
+  metric_value: unknown;
+  unit?: string | null;
+  description: string;
+}
+
+export interface HypothesisAnalysisData {
+  hypothesis_id: string;
+  code: string;
+  title: string;
+  category: string;
+  explanation: string;
+  plausibility: 'HIGH' | 'MEDIUM' | 'LOW' | 'UNCONFIRMED' | string;
+  confidence_score: number;
+  confidence_rationale: string;
+  investigation_priority: 'HIGH' | 'MEDIUM' | 'LOW' | string;
+  investigation_status: string;
+  supporting_evidence: EvidenceItemData[];
+  contradicting_evidence: EvidenceItemData[];
+  missing_evidence: string[];
+  additional_data_required: string[];
+  recommended_verification_steps: string[];
+}
+
+export interface PrioritizationFactorData {
+  factor_id: string;
+  name: string;
+  weight_percent: number;
+  raw_value: unknown;
+  normalized_score: number;
+  weighted_contribution: number;
+  explanation: string;
+}
+
+export interface PrioritizationReportData {
+  boundary_asset_code: string;
+  total_priority_score: number;
+  priority_level: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | string;
+  factors: PrioritizationFactorData[];
+  top_recommended_hypothesis: string;
+  operational_action_summary: string;
+}
+
+export interface InvestigationDossierData {
+  boundary_asset_code: string;
+  boundary_asset_name: string;
+  voltage_class: string;
+  analysis_period_start: string;
+  analysis_period_end: string;
+  accounting: AccountingDossierData;
+  hypotheses: HypothesisAnalysisData[];
+  prioritization: PrioritizationReportData;
+  generated_at: string;
+}
+
+export interface GuardrailValidationResultData {
+  passed: boolean;
+  accounting_invariance_verified: boolean;
+  unsupported_allegations_prevented: boolean;
+  citations_verified: boolean;
+  hallucinated_utility_access_blocked: boolean;
+  hypothetical_modifications_clearly_labeled: boolean;
+  rules_checked: string[];
+  validation_notes: string[];
+}
+
+export interface AssistantQueryResponseData {
+  boundary_asset_code: string;
+  query: string;
+  answer: string;
+  mode: 'RULE_BASED_FALLBACK' | 'EXTERNAL_AI' | string;
+  model_name: string;
+  evidence_citations: EvidenceItemData[];
+  suggested_followups: string[];
+  guardrail_validation: GuardrailValidationResultData;
+  timestamp: string;
+}

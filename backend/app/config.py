@@ -11,10 +11,14 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     # Application Metadata
     PROJECT_NAME: str = Field(default="GRIDGUARD NEXUS X", description="Platform name")
-    PROJECT_VERSION: str = Field(default="3.0.0-level3", description="Current release version")
-    STAGE: str = Field(default="LEVEL 3: CORE ELECTRICITY INTELLIGENCE", description="Platform development phase")
+    PROJECT_VERSION: str = Field(default="4.0.0-level4", description="Current release version")
+    STAGE: str = Field(default="LEVEL 4: AI-ASSISTED INVESTIGATION", description="Platform development phase")
     ENVIRONMENT: str = Field(default="development", description="Runtime environment: development/testing/production")
     DEBUG: bool = Field(default=True, description="Debug mode flag")
+
+    # AI Assistant Configuration (Level 4)
+    GEMINI_API_KEY: Optional[str] = Field(default=None, description="Optional Google Gemini API Key for AI Assistant")
+    GEMINI_MODEL: str = Field(default="gemini-1.5-flash", description="Model name for AI assistant")
 
     # API Configuration
     API_V1_PREFIX: str = Field(default="/api/v1", description="API v1 prefix")

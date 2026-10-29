@@ -81,13 +81,13 @@ export function Sidebar({
       disabled: false,
     },
     {
-      id: 'forensics',
+      id: 'ai-investigation',
       label: 'AI Forensic Investigation',
-      description: 'Theft anomaly classification',
+      description: 'Multi-hypothesis & explainable ranking',
       icon: Cpu,
-      badge: 'Level 3 Milestone',
-      badgeVariant: 'slate' as const,
-      disabled: true,
+      badge: 'Level 4 Active',
+      badgeVariant: 'emerald' as const,
+      disabled: false,
     },
   ];
 

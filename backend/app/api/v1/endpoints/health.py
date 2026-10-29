@@ -57,7 +57,7 @@ async def get_health(request: Request) -> StandardSuccessResponse[HealthStatusDa
             name=AIServicesModuleStatus.NAME,
             status=AIServicesModuleStatus.STATUS,
             details=f"Phase: {AIServicesModuleStatus.LEVEL_TARGET} - {AIServicesModuleStatus.DESCRIPTION}",
-            ready=False
+            ready=True
         ),
     ]
 

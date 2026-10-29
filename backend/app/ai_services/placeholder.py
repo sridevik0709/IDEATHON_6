@@ -1,16 +1,16 @@
 """
 Architectural boundary guard for AI & Investigation module.
-Level 1 explicitly reserves machine learning and neural anomaly detectors for subsequent milestones.
+Level 4: AI-Assisted Investigation.
 """
 
 from typing import Dict
 
 
 class AIServicesModuleStatus:
-    NAME: str = "AI Grid Intelligence & Forensic Auditor"
-    LEVEL_TARGET: str = "Level 3"
-    STATUS: str = "standby"
-    DESCRIPTION: str = "Non-technical loss detection, tampering classification, automated case builder"
+    NAME: str = "AI Investigation & Multi-Hypothesis Engine"
+    LEVEL_TARGET: str = "Level 4"
+    STATUS: str = "operational"
+    DESCRIPTION: str = "Multi-hypothesis forensic matrix, explainable 6-factor prioritization, and evidence-grounded AI assistant"
 
     @classmethod
     def get_status(cls) -> Dict[str, str]:

@@ -12,8 +12,8 @@ def test_version_endpoint(client):
     
     data = payload["data"]
     assert data["project_name"] == "GRIDGUARD NEXUS X"
-    assert "3.0.0" in data["version"]
-    assert "LEVEL 3" in data["stage"]
+    assert "4.0.0" in data["version"]
+    assert "LEVEL 4" in data["stage"]
     assert data["api_prefix"] == "/api/v1"
     assert "capabilities" in data
     assert "foundation" in data["capabilities"]

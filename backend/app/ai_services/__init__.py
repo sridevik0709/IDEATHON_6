@@ -1,9 +1,34 @@
 """
-AI & Advanced Investigation Services.
-Reserved for Level 3 (Theft anomaly detection, predictive outage models, forensic investigation trails).
-Strictly decoupled from core operational controllers.
+AI-Assisted Investigation Subsystem.
+Level 4: AI-Assisted Investigation.
 """
 
-from .placeholder import AIServicesModuleStatus
+from app.ai_services.assistant import (
+    AiInvestigationAssistant,
+    DeterministicInvestigationSynthesizer,
+    GuardrailValidator,
+)
+from app.ai_services.hypothesis_engine import (
+    EvidenceItem,
+    HypothesisAnalysis,
+    HypothesisGenerationEngine,
+)
+from app.ai_services.placeholder import AIServicesModuleStatus
+from app.ai_services.prioritizer import (
+    InvestigationPrioritizer,
+    PrioritizationFactor,
+    PrioritizationReport,
+)
 
-__all__ = ["AIServicesModuleStatus"]
+__all__ = [
+    "AIServicesModuleStatus",
+    "EvidenceItem",
+    "HypothesisAnalysis",
+    "HypothesisGenerationEngine",
+    "PrioritizationFactor",
+    "PrioritizationReport",
+    "InvestigationPrioritizer",
+    "AiInvestigationAssistant",
+    "DeterministicInvestigationSynthesizer",
+    "GuardrailValidator",
+]

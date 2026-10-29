@@ -7,6 +7,7 @@ from app.api.v1.endpoints import (
     accounting,
     data_foundation,
     health,
+    investigation,
     meters,
     scenarios,
     validation,
@@ -22,3 +23,4 @@ api_v1_router.include_router(scenarios.router)
 api_v1_router.include_router(data_foundation.router)
 api_v1_router.include_router(meters.router)
 api_v1_router.include_router(accounting.router)
+api_v1_router.include_router(investigation.router)

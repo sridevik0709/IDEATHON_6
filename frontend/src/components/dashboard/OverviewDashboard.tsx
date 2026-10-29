@@ -25,6 +25,7 @@ import { ReadinessGrid } from '@/components/dashboard/ReadinessGrid';
 import { ScenariosExplorer } from '@/components/dashboard/ScenariosExplorer';
 import { MeterLookupView } from '@/components/dashboard/MeterLookupView';
 import { DiscrepancyExplorer } from '@/components/dashboard/DiscrepancyExplorer';
+import { AiInvestigationView } from '@/components/dashboard/AiInvestigationView';
 import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
 import { ValidationConsole } from '@/components/dashboard/ValidationConsole';
 import { envConfig } from '@/lib/config';
@@ -119,11 +120,11 @@ export function OverviewDashboard() {
                     National Ideathon Milestone:
                   </span>
                   <Badge variant="emerald" className="text-[10px]">
-                    LEVEL 3: CORE ELECTRICITY INTELLIGENCE
+                    LEVEL 4: AI-ASSISTED INVESTIGATION
                   </Badge>
                 </div>
                 <p className="text-xs text-slate-300 font-sans mt-0.5">
-                  Deterministic boundary energy accounting (Unaccounted = Entering − Downstream − Other Flows), 10-point data quality audits, and cluster meter intelligence.
+                  Multi-hypothesis forensic matrix, explainable 6-factor prioritization ranking, and evidence-grounded AI assistant with automated deterministic fallback.
                 </p>
               </div>
             </div>
@@ -131,10 +132,10 @@ export function OverviewDashboard() {
             <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto font-mono text-xs">
               <button
                 type="button"
-                onClick={() => setActiveTab('meter-lookup')}
-                className="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold transition-all cursor-pointer"
+                onClick={() => setActiveTab('ai-investigation')}
+                className="px-3 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 border border-indigo-500/40 font-bold transition-all cursor-pointer"
               >
-                Meter Lookup →
+                AI Investigation →
               </button>
               <button
                 type="button"
@@ -142,6 +143,13 @@ export function OverviewDashboard() {
                 className="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold transition-all cursor-pointer"
               >
                 Discrepancy Explorer →
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab('meter-lookup')}
+                className="px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 font-bold transition-all cursor-pointer"
+              >
+                Meter Lookup →
               </button>
             </div>
           </div>
@@ -220,15 +228,19 @@ export function OverviewDashboard() {
                           ready: isConnected,
                         },
                         {
-                          name: 'AI Grid Intelligence & Forensic Auditor',
-                          status: 'standby',
-                          details: 'Reserved for Level 4',
-                          ready: false,
+                          name: 'AI Investigation & Multi-Hypothesis Engine',
+                          status: isConnected ? 'operational' : 'standby',
+                          details: 'Active (Level 4) - Multi-hypothesis matrix, 6-factor prioritization & AI assistant',
+                          ready: isConnected,
                         },
                       ]
                     }
                   />
                 </div>
+              )}
+
+              {(activeTab === 'ai-investigation' || activeTab === 'forensics') && (
+                <AiInvestigationView />
               )}
 
               {activeTab === 'meter-lookup' && (

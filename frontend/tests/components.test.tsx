@@ -7,6 +7,7 @@ import { ReadinessGrid } from '@/components/dashboard/ReadinessGrid';
 import { SystemHealthCard } from '@/components/dashboard/SystemHealthCard';
 import { MeterLookupView } from '@/components/dashboard/MeterLookupView';
 import { DiscrepancyExplorer } from '@/components/dashboard/DiscrepancyExplorer';
+import { AiInvestigationView } from '@/components/dashboard/AiInvestigationView';
 import type { HealthStatusData, SubsystemHealth } from '@/types/api';
 
 describe('Frontend UI Components', () => {
@@ -84,5 +85,12 @@ describe('Frontend UI Components', () => {
     render(<DiscrepancyExplorer />);
     expect(screen.getByText(/Forensic Non-Prejudgment Mandate/i)).toBeDefined();
     expect(screen.getByText(/Select Physical Distribution Boundary/i)).toBeDefined();
+  });
+
+  it('renders AiInvestigationView with multi-hypothesis forensic headers', () => {
+    render(<AiInvestigationView />);
+    expect(screen.getByText(/Level 4: AI-Assisted Forensic Investigation/i)).toBeDefined();
+    expect(screen.getByText(/Multi-hypothesis forensic matrix, 6-factor explainable prioritization/i)).toBeDefined();
+    expect(screen.getByText(/Boundary:/i)).toBeDefined();
   });
 });
